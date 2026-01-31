@@ -196,54 +196,60 @@ export function Chat() {
     <div className="app" style={{ position: 'relative', zIndex: 1 }}>
       {/* Header */}
       <header className="header">
-        <div className="header-left">
-          <span className="header-title">Lobster Language Model</span>
-          <span className="header-subtitle">Oracle of the Molt</span>
-        </div>
-        
-        <div className="header-center">
-          <button
-            onClick={copyToClipboard}
-            className="flex items-center gap-2 px-3 py-1 bg-[#1a1814] border border-[#3d3a34] rounded hover:border-[#6a6560] transition-colors font-mono text-sm text-[#8a8580]"
-            style={{ background: '#1a1814', border: '1px solid #3d3a34' }}
-          >
-            <span className="truncate max-w-[120px] sm:max-w-[200px]">
-              {contractAddress.slice(0, 6)}...{contractAddress.slice(-4)}
-            </span>
-            {copied ? (
-              <span className="text-green-500">✓</span>
-            ) : (
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-            )}
-          </button>
-        </div>
-        
-        <div className="header-right" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <button
-            onClick={() => setShowLibrary(true)}
-            className="text-[#6a6560] hover:text-[#c94a4a] transition-colors font-serif"
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontSize: '1rem' }}
-          >
-            📜 Archives
-          </button>
-          <a 
-            href="https://twitter.com/moltbook" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-[#6a6560] hover:text-[#c4b5a0] transition-colors"
-          >
-            <svg 
-              viewBox="0 0 24 24" 
-              width="20" 
-              height="20" 
-              fill="currentColor"
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          {/* Title - always visible */}
+          <div className="flex items-baseline gap-2">
+            <span className="header-title">Lobster Language Model</span>
+            <span className="header-subtitle hidden md:inline">Oracle of the Molt</span>
+          </div>
+          
+          {/* Contract Address - centered on mobile */}
+          <div className="flex justify-center md:justify-start">
+            <button
+              onClick={copyToClipboard}
+              className="flex items-center gap-2 px-3 py-1 bg-[#1a1814] border border-[#3d3a34] rounded hover:border-[#6a6560] transition-colors font-mono text-xs md:text-sm text-[#8a8580]"
             >
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-          </a>
+              <span className="truncate max-w-[150px] md:max-w-[200px]">
+                {contractAddress.slice(0, 6)}...{contractAddress.slice(-4)}
+              </span>
+              {copied ? (
+                <span className="text-green-500">✓</span>
+              ) : (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              )}
+            </button>
+          </div>
+          
+          {/* Right side items */}
+          <div className="flex items-center justify-between md:justify-end gap-4">
+            <span className="text-[#6a6560] font-mono text-xs italic md:hidden">Oracle of the Molt</span>
+            <button
+              onClick={() => setShowLibrary(true)}
+              className="text-[#6a6560] hover:text-[#c94a4a] transition-colors font-mono text-xs md:text-base"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+            >
+              📜 Archives
+            </button>
+            <a 
+              href="https://twitter.com/moltbook" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-[#6a6560] hover:text-[#c4b5a0] transition-colors"
+            >
+              <svg 
+                viewBox="0 0 24 24" 
+                width="18" 
+                height="18" 
+                className="md:w-5 md:h-5"
+                fill="currentColor"
+              >
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </header>
       

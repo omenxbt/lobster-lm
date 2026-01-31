@@ -99,11 +99,11 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
   if (!isOpen) return null;
   
   return (
-    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-5">
-      <div className="bg-[#0d0d0f] border border-[#3d3a34] rounded-lg w-full max-w-5xl max-h-[85vh] overflow-hidden flex flex-col shadow-2xl">
+    <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-2 md:p-5">
+      <div className="bg-[#0d0d0f] border border-[#3d3a34] rounded-lg w-full h-full md:h-auto md:max-h-[85vh] md:max-w-5xl overflow-hidden flex flex-col shadow-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-[#3d3a34]">
-          <h2 className="text-[#c94a4a] font-serif text-2xl" style={{ fontFamily: 'var(--font-cinzel), serif' }}>
+        <div className="flex items-center justify-between p-4 md:p-6 border-b border-[#3d3a34]">
+          <h2 className="text-[#c94a4a] font-serif text-lg md:text-2xl" style={{ fontFamily: 'var(--font-cinzel), serif' }}>
             📜 Conversation Archives
           </h2>
           <button
@@ -115,10 +115,10 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
         </div>
         
         {/* Tabs */}
-        <div className="flex items-center gap-4 px-6 py-4 border-b border-[#3d3a34]">
+        <div className="flex items-center gap-2 md:gap-4 px-4 md:px-6 py-3 md:py-4 border-b border-[#3d3a34]">
           <button
             onClick={() => setMode('personal')}
-            className={`font-mono text-sm px-3 py-1 rounded transition-colors ${
+            className={`font-mono text-xs md:text-sm px-2 md:px-3 py-1 rounded transition-colors ${
               mode === 'personal' 
                 ? 'bg-[#2a2620] text-[#c4b5a0]' 
                 : 'text-[#6a6560] hover:text-[#c4b5a0]'
@@ -128,7 +128,7 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
           </button>
           <button
             onClick={() => setMode('community')}
-            className={`font-mono text-sm px-3 py-1 rounded transition-colors ${
+            className={`font-mono text-xs md:text-sm px-2 md:px-3 py-1 rounded transition-colors ${
               mode === 'community' 
                 ? 'bg-[#2a2620] text-[#c4b5a0]' 
                 : 'text-[#6a6560] hover:text-[#c4b5a0]'
@@ -138,9 +138,9 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
           </button>
         </div>
         
-        <div className="flex flex-1 overflow-hidden">
+        <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
           {/* Conversation List */}
-          <div className="w-2/5 border-r border-[#3d3a34] overflow-y-auto bg-[#0a0a0c]">
+          <div className="w-full md:w-2/5 border-b md:border-b-0 md:border-r border-[#3d3a34] overflow-y-auto bg-[#0a0a0c] max-h-[40vh] md:max-h-none">
             {loading ? (
               <div className="p-6 text-[#6a6560] font-serif text-base italic">
                 Loading archives...
@@ -185,7 +185,7 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
           </div>
           
           {/* Conversation View */}
-          <div className="flex-1 overflow-y-auto p-6 bg-[#0a0a0c]">
+          <div className="flex-1 overflow-y-auto p-4 md:p-6 bg-[#0a0a0c]">
             {selectedConvo ? (
               <div className="space-y-5">
                 <div className="pb-4 mb-6 border-b border-[#3d3a34]">
@@ -212,10 +212,10 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
                 {selectedConvo.messages.map(msg => (
                   <div
                     key={msg.id}
-                    className={`p-5 rounded-lg mb-5 ${
+                    className={`p-3 md:p-5 rounded-lg mb-5 ${
                       msg.role === 'user'
-                        ? 'bg-[#1a1814]/50 ml-12 border-l-2 border-[#3d3a34]'
-                        : 'bg-[#0d0d0f] mr-12 border-l-2 border-[#c94a4a]'
+                        ? 'bg-[#1a1814]/50 ml-0 md:ml-12 border-l-2 border-[#3d3a34]'
+                        : 'bg-[#0d0d0f] mr-0 md:mr-12 border-l-2 border-[#c94a4a]'
                     }`}
                   >
                     <div className="text-[#c94a4a] font-serif text-sm mb-3 uppercase tracking-wider">
