@@ -195,47 +195,49 @@ export function Chat() {
   return (
     <div className="app min-h-screen flex flex-col" style={{ position: 'relative', zIndex: 1 }}>
       {/* Header */}
-      <header className="header flex-shrink-0 px-4 py-4">
-        <div className="flex items-center justify-between">
+      <header className="relative px-6 py-4 border-b border-[#3d3a34] bg-[#0a0908] overflow-hidden flex-shrink-0" style={{ background: 'rgba(10, 10, 12, 0.7)', backdropFilter: 'blur(20px) saturate(180%)', WebkitBackdropFilter: 'blur(20px) saturate(180%)', boxShadow: '0 1px 0 rgba(255, 255, 255, 0.05) inset', zIndex: 10 }}>
+        <div className="max-w-screen-xl mx-auto flex items-center justify-between relative">
           
-          {/* Left side: Logo */}
-          <div className="flex items-center">
-            {/* Logo - always visible */}
+          {/* Left: Logo + Title */}
+          <div className="flex items-center gap-3 flex-shrink-0">
             <img 
               src="/llm-logo.png" 
-              alt="Lobster LM" 
-              className="w-10 h-10 md:w-12 md:h-12 object-contain"
+              alt="LLM" 
+              className="w-10 h-10 md:w-12 md:h-12"
             />
+            <span className="hidden md:inline text-[#c4b5a0] font-mono text-sm tracking-[0.2em]">
+              LOBSTER LANGUAGE MODEL
+            </span>
           </div>
           
-          {/* Center: Contract Address */}
-          <button
-            onClick={copyToClipboard}
-            className="flex items-center gap-2 px-3 py-1.5 bg-[#1a1814] border border-[#3d3a34] rounded text-xs font-mono text-[#8a8580] hover:border-[#6a6560] transition-colors"
-          >
-            <span className="hidden sm:inline">{contractAddress.slice(0, 6)}...{contractAddress.slice(-4)}</span>
-            <span className="sm:hidden">{contractAddress.slice(0, 4)}...{contractAddress.slice(-3)}</span>
-            {copied ? (
-              <span className="text-green-500">✓</span>
-            ) : (
-              <span>📋</span>
-            )}
-          </button>
+          {/* Center: Contract - absolutely centered */}
+          <div className="absolute left-1/2 transform -translate-x-1/2">
+            <button
+              onClick={copyToClipboard}
+              className="flex items-center gap-2 px-3 py-1.5 bg-[#1a1814] border border-[#3d3a34] rounded text-xs font-mono text-[#8a8580] hover:border-[#6a6560] transition-colors"
+            >
+              <span>{contractAddress.slice(0, 6)}...{contractAddress.slice(-4)}</span>
+              {copied ? (
+                <span className="text-green-500">✓</span>
+              ) : (
+                <span>📋</span>
+              )}
+            </button>
+          </div>
           
-          {/* Right side: Archives + X */}
-          <div className="flex items-center gap-4">
+          {/* Right: Archives + X */}
+          <div className="flex items-center gap-4 flex-shrink-0">
             <button
               onClick={() => setShowLibrary(true)}
-              className="flex items-center gap-1 text-[#6a6560] hover:text-[#c4b5a0] font-mono text-xs transition-colors"
+              className="text-[#6a6560] hover:text-[#c4b5a0] font-mono text-xs transition-colors"
               style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
             >
-              <span className="hidden sm:inline">📜 Archives</span>
-              <span className="sm:hidden">📜</span>
+              📜 <span className="hidden sm:inline">Archives</span>
             </button>
             
             <a 
-              href="https://twitter.com/moltbook" 
-              target="_blank" 
+              href="https://twitter.com/moltbook"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-[#6a6560] hover:text-[#c4b5a0] transition-colors"
             >
