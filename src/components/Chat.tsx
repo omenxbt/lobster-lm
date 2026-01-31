@@ -198,19 +198,14 @@ export function Chat() {
       <header className="header flex-shrink-0 px-4 py-4">
         <div className="flex items-center justify-between">
           
-          {/* Left side: Logo + Title */}
-          <div className="flex items-center gap-3">
+          {/* Left side: Logo */}
+          <div className="flex items-center">
             {/* Logo - always visible */}
             <img 
               src="/llm-logo.png" 
               alt="Lobster LM" 
               className="w-10 h-10 md:w-12 md:h-12 object-contain"
             />
-            
-            {/* Title - hidden on mobile, visible on desktop */}
-            <h1 className="hidden md:block text-[#c4b5a0] font-mono text-sm tracking-[0.2em]">
-              LOBSTER LANGUAGE MODEL
-            </h1>
           </div>
           
           {/* Center: Contract Address */}
