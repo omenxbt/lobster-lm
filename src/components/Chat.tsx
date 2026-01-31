@@ -195,51 +195,60 @@ export function Chat() {
   return (
     <div className="app min-h-screen flex flex-col" style={{ position: 'relative', zIndex: 1 }}>
       {/* Header */}
-      <header className="w-full bg-[#0a0908] border-b border-[#3d3a34] flex-shrink-0" style={{ background: 'rgba(10, 10, 12, 0.7)', backdropFilter: 'blur(20px) saturate(180%)', WebkitBackdropFilter: 'blur(20px) saturate(180%)', boxShadow: '0 1px 0 rgba(255, 255, 255, 0.05) inset', zIndex: 10 }}>
-        <div className="mx-auto px-8 md:px-12 py-5 md:py-6">
-          <div className="flex items-center justify-between">
-            
-            {/* Left: Logo */}
-            <img 
-              src="/llm-logo.png" 
-              alt="LLM" 
-              className="w-12 h-12 md:w-14 md:h-14"
-            />
-            
-            {/* Center: Contract */}
+      <header style={{ width: '100%', backgroundColor: '#0a0908', borderBottom: '1px solid #3d3a34', padding: '24px 48px', background: 'rgba(10, 10, 12, 0.7)', backdropFilter: 'blur(20px) saturate(180%)', WebkitBackdropFilter: 'blur(20px) saturate(180%)', boxShadow: '0 1px 0 rgba(255, 255, 255, 0.05) inset', zIndex: 10, flexShrink: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          
+          <img 
+            src="/llm-logo.png" 
+            alt="LLM" 
+            style={{ width: '56px', height: '56px' }}
+          />
+          
+          <button
+            onClick={copyToClipboard}
+            style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '8px', 
+              padding: '8px 16px', 
+              backgroundColor: '#1a1814', 
+              border: '1px solid #3d3a34', 
+              borderRadius: '4px', 
+              fontSize: '12px', 
+              fontFamily: 'monospace', 
+              color: '#8a8580',
+              cursor: 'pointer'
+            }}
+          >
+            <span>{contractAddress.slice(0, 6)}...{contractAddress.slice(-4)}</span>
+            {copied ? <span style={{ color: '#22c55e' }}>✓</span> : <span>📋</span>}
+          </button>
+          
+          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
             <button
-              onClick={copyToClipboard}
-              className="flex items-center gap-2 px-4 py-2 bg-[#1a1814] border border-[#3d3a34] rounded text-xs font-mono text-[#8a8580] hover:border-[#6a6560] transition-colors"
+              onClick={() => setShowLibrary(true)}
+              style={{ 
+                color: '#6a6560', 
+                fontFamily: 'monospace', 
+                fontSize: '14px', 
+                background: 'none', 
+                border: 'none', 
+                cursor: 'pointer' 
+              }}
             >
-              <span>{contractAddress.slice(0, 6)}...{contractAddress.slice(-4)}</span>
-              {copied ? (
-                <span className="text-green-500">✓</span>
-              ) : (
-                <span>📋</span>
-              )}
+              📜 Archives
             </button>
             
-            {/* Right: Archives + X */}
-            <div className="flex items-center gap-4 md:gap-6">
-              <button
-                onClick={() => setShowLibrary(true)}
-                className="text-[#6a6560] hover:text-[#c4b5a0] font-mono text-sm transition-colors"
-                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-              >
-                📜 <span className="hidden sm:inline">Archives</span>
-              </button>
-              
-              <a 
-                href="https://twitter.com/moltbook"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#6a6560] hover:text-[#c4b5a0] transition-colors"
-              >
-                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-              </a>
-            </div>
+            <a 
+              href="https://twitter.com/moltbook"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#6a6560' }}
+            >
+              <svg viewBox="0 0 24 24" style={{ width: '20px', height: '20px' }} fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
           </div>
         </div>
       </header>
