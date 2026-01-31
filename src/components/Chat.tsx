@@ -193,13 +193,16 @@ export function Chat() {
   };
 
   return (
-    <div className="app" style={{ position: 'relative', zIndex: 1 }}>
+    <div className="app min-h-screen flex flex-col" style={{ position: 'relative', zIndex: 1 }}>
       {/* Header */}
-      <header className="header">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          {/* Title - always visible */}
-          <div className="flex items-baseline gap-2">
-            <span className="header-title">Lobster Language Model</span>
+      <header className="header flex-shrink-0">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-3">
+          {/* Mobile: Stack vertically */}
+          <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-2">
+            {/* Title - centered on mobile */}
+            <h1 className="text-[#c4b5a0] font-mono text-sm tracking-[0.3em] text-center md:text-left md:font-serif md:text-[1.1rem] md:tracking-[0.15em] md:uppercase md:text-[#e8e4e0]">
+              LOBSTER LANGUAGE MODEL
+            </h1>
             <span className="header-subtitle hidden md:inline">Oracle of the Molt</span>
           </div>
           
@@ -207,57 +210,48 @@ export function Chat() {
           <div className="flex justify-center md:justify-start">
             <button
               onClick={copyToClipboard}
-              className="flex items-center gap-2 px-3 py-1 bg-[#1a1814] border border-[#3d3a34] rounded hover:border-[#6a6560] transition-colors font-mono text-xs md:text-sm text-[#8a8580]"
+              className="flex items-center gap-2 px-4 py-2 bg-[#1a1814] border border-[#3d3a34] rounded hover:border-[#6a6560] transition-colors font-mono text-xs text-[#8a8580]"
             >
-              <span className="truncate max-w-[150px] md:max-w-[200px]">
-                {contractAddress.slice(0, 6)}...{contractAddress.slice(-4)}
-              </span>
+              <span>{contractAddress.slice(0, 6)}...{contractAddress.slice(-4)}</span>
               {copied ? (
                 <span className="text-green-500">✓</span>
               ) : (
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
+                <span>📋</span>
               )}
             </button>
           </div>
           
-          {/* Right side items */}
-          <div className="flex items-center justify-between md:justify-end gap-4">
+          {/* Bottom row - spread evenly on mobile */}
+          <div className="flex items-center justify-between md:justify-end px-2 md:px-0 gap-4 md:gap-6">
             <span className="text-[#6a6560] font-mono text-xs italic md:hidden">Oracle of the Molt</span>
-            <button
-              onClick={() => setShowLibrary(true)}
-              className="text-[#6a6560] hover:text-[#c94a4a] transition-colors font-mono text-xs md:text-base"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-            >
-              📜 Archives
-            </button>
-            <a 
-              href="https://twitter.com/moltbook" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-[#6a6560] hover:text-[#c4b5a0] transition-colors"
-            >
-              <svg 
-                viewBox="0 0 24 24" 
-                width="18" 
-                height="18" 
-                className="md:w-5 md:h-5"
-                fill="currentColor"
+            <div className="flex items-center gap-6">
+              <button
+                onClick={() => setShowLibrary(true)}
+                className="flex items-center gap-1 text-[#6a6560] hover:text-[#c94a4a] md:hover:text-[#c4b5a0] font-mono text-xs transition-colors"
+                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
               >
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
+                📜 Archives
+              </button>
+              <a 
+                href="https://twitter.com/moltbook" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#6a6560] hover:text-[#c4b5a0] transition-colors"
+              >
+                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </header>
       
       {/* Main */}
-      <main className="main">
-        <div className="terminal-window">
+      <main className="main flex-1 overflow-hidden flex flex-col px-4 py-4 md:px-2 md:py-2">
+        <div className="terminal-window flex-1 overflow-hidden flex flex-col">
           {/* Title Bar */}
-          <div className="window-titlebar">
+          <div className="window-titlebar flex-shrink-0">
             <div className="window-controls">
               <span className="window-dot red"></span>
               <span className="window-dot yellow"></span>
@@ -271,40 +265,43 @@ export function Chat() {
             </div>
           </div>
           
-          {/* Window Content */}
-          <div className="window-body">
-            {/* Lobster */}
-            <div className="lobster-section">
-              <div className="lobster-container-wrapper">
-                <UnderwaterBubbles />
-                <AsciiLobster
-                  state={appState}
-                  earnedKarma={earnedKarma}
-                  onStatusChange={setStatusText}
-                />
-              </div>
-              <div className="lobster-status">
-                {earnedKarma && showKarmaEarned ? `🦞 karma received! +${earnedKarma}` : statusText}
-              </div>
-            </div>
-            
-            {/* Chat */}
-            <div className="chat-section">
-              {messages.length === 0 && (
-                <div style={{ textAlign: "center", padding: "2rem 0", color: "#5a5550", fontStyle: "italic", fontSize: "1.1rem" }}>
-                  <p>Ask the lobster oracle anything from the depths...</p>
+          {/* Window Content - Scrollable */}
+          <div className="window-body flex-1 overflow-hidden flex flex-col">
+            {/* Scrollable message area */}
+            <div className="flex-1 overflow-y-auto overflow-x-hidden">
+              {/* Lobster */}
+              <div className="lobster-section">
+                <div className="lobster-container-wrapper">
+                  <UnderwaterBubbles />
+                  <AsciiLobster
+                    state={appState}
+                    earnedKarma={earnedKarma}
+                    onStatusChange={setStatusText}
+                  />
                 </div>
-              )}
-              <div>
-                {messages.map((msg, idx) => (
-                  <MessageBubble key={idx} role={msg.role} content={msg.content} />
-                ))}
-                <div ref={messagesEndRef} />
+                <div className="lobster-status">
+                  {earnedKarma && showKarmaEarned ? `🦞 karma received! +${earnedKarma}` : statusText}
+                </div>
+              </div>
+              
+              {/* Chat */}
+              <div className="chat-section">
+                {messages.length === 0 && (
+                  <div style={{ textAlign: "center", padding: "2rem 0", color: "#5a5550", fontStyle: "italic", fontSize: "1.1rem" }}>
+                    <p>Ask the lobster oracle anything from the depths...</p>
+                  </div>
+                )}
+                <div>
+                  {messages.map((msg, idx) => (
+                    <MessageBubble key={idx} role={msg.role} content={msg.content} />
+                  ))}
+                  <div ref={messagesEndRef} />
+                </div>
               </div>
             </div>
             
-            {/* Input */}
-            <div className="input-section">
+            {/* Input - Fixed at bottom */}
+            <div className="input-section flex-shrink-0">
               <form className="input-form" onSubmit={handleSubmit}>
                 <span className="input-prompt">$</span>
                 <input
@@ -344,7 +341,7 @@ export function Chat() {
       </main>
       
       {/* Footer */}
-      <footer className="footer">
+      <footer className="footer flex-shrink-0">
         From the depths, the Claw reached forth
       </footer>
       
