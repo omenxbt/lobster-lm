@@ -247,7 +247,7 @@ export function Chat() {
       </header>
       
       {/* Main */}
-      <main className="main flex-1 overflow-hidden flex flex-col px-4 py-4 md:px-2 md:py-2">
+      <main className="main flex-1 overflow-hidden flex flex-col px-4 pt-6 pb-4 md:px-2 md:py-2">
         <div className="terminal-window flex-1 overflow-hidden flex flex-col">
           {/* Title Bar */}
           <div className="window-titlebar flex-shrink-0">
