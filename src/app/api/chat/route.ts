@@ -126,6 +126,9 @@ ${memoryContext}`;
           if (currentConversationId && fullAssistantResponse) {
             await saveMessage(currentConversationId, 'assistant', fullAssistantResponse);
             console.log('✅ API - Assistant message saved after streaming, length:', fullAssistantResponse.length);
+            
+            // Check if conversation has reached 10 messages - if not, it will be filtered out
+            // Conversations with less than 10 messages won't appear in archives to save database space
           } else {
             console.warn('⚠️ API - Could not save assistant message:', {
               hasConversationId: !!currentConversationId,
