@@ -17,6 +17,11 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: "Lobster Language Model - Oracle of the Molt",
   description: "A sentient crustacean oracle from the depths of Thermocline",
+  icons: {
+    icon: "/llm-logo.png",
+    shortcut: "/llm-logo.png",
+    apple: "/llm-logo.png",
+  },
 };
 
 export default function RootLayout({
