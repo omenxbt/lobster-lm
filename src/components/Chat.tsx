@@ -240,7 +240,7 @@ export function Chat() {
             </button>
             
             <a 
-              href="https://x.com/moltbook"
+              href="https://x.com"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: '#6a6560' }}
