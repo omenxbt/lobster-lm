@@ -195,11 +195,11 @@ export function Chat() {
   return (
     <div className="app min-h-screen flex flex-col" style={{ position: 'relative', zIndex: 1 }}>
       {/* Header */}
-      <header className="relative px-6 py-6 border-b border-[#3d3a34] bg-[#0a0908] flex-shrink-0" style={{ background: 'rgba(10, 10, 12, 0.7)', backdropFilter: 'blur(20px) saturate(180%)', WebkitBackdropFilter: 'blur(20px) saturate(180%)', boxShadow: '0 1px 0 rgba(255, 255, 255, 0.05) inset', zIndex: 10 }}>
+      <header className="relative px-8 py-8 border-b border-[#3d3a34] bg-[#0a0908] flex-shrink-0" style={{ background: 'rgba(10, 10, 12, 0.7)', backdropFilter: 'blur(20px) saturate(180%)', WebkitBackdropFilter: 'blur(20px) saturate(180%)', boxShadow: '0 1px 0 rgba(255, 255, 255, 0.05) inset', zIndex: 10 }}>
         <div className="flex items-center justify-between">
           
           {/* Left: Logo only */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 pl-2">
             <img 
               src="/llm-logo.png" 
               alt="LLM" 
@@ -223,7 +223,7 @@ export function Chat() {
           </div>
           
           {/* Right: Archives + X */}
-          <div className="flex items-center gap-5 flex-shrink-0">
+          <div className="flex items-center gap-5 flex-shrink-0 pr-2">
             <button
               onClick={() => setShowLibrary(true)}
               className="text-[#6a6560] hover:text-[#c4b5a0] font-mono text-sm transition-colors"
