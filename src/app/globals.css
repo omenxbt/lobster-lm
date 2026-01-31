@@ -380,7 +380,43 @@ input::placeholder {
 }
 
 /* Fixed Layout Styles */
-/* Header styles removed - now using inline styles in component */
+/* Header responsive styles for mobile */
+header[style*="padding"] {
+  padding: 16px 20px !important;
+}
+
+@media (min-width: 768px) {
+  header[style*="padding"] {
+    padding: 24px 48px !important;
+  }
+}
+
+/* Mobile header adjustments */
+@media (max-width: 767px) {
+  header img[src="/llm-logo.png"] {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  header button {
+    padding: 6px 12px !important;
+    font-size: 11px !important;
+    gap: 6px !important;
+  }
+  
+  header div[style*="gap: 24px"] {
+    gap: 12px !important;
+  }
+  
+  header button[onclick*="setShowLibrary"] {
+    font-size: 12px !important;
+  }
+  
+  header svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+}
 
 .header-title {
   font-family: var(--font-cinzel), serif;
