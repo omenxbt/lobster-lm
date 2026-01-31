@@ -381,38 +381,38 @@ input::placeholder {
 
 /* Fixed Layout Styles */
 /* Header responsive styles for mobile */
-header[style*="padding"] {
+.app-header {
   padding: 16px 20px !important;
 }
 
 @media (min-width: 768px) {
-  header[style*="padding"] {
+  .app-header {
     padding: 24px 48px !important;
   }
 }
 
 /* Mobile header adjustments */
 @media (max-width: 767px) {
-  header img[src="/llm-logo.png"] {
+  .app-header img[src="/llm-logo.png"] {
     width: 40px !important;
     height: 40px !important;
   }
   
-  header button {
+  .app-header button {
     padding: 6px 12px !important;
     font-size: 11px !important;
     gap: 6px !important;
   }
   
-  header div[style*="gap: 24px"] {
+  .app-header > div > div:last-child {
     gap: 12px !important;
   }
   
-  header button[onclick*="setShowLibrary"] {
+  .app-header button[onclick*="setShowLibrary"] {
     font-size: 12px !important;
   }
   
-  header svg {
+  .app-header svg {
     width: 18px !important;
     height: 18px !important;
   }

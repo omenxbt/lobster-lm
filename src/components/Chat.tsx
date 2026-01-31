@@ -195,7 +195,7 @@ export function Chat() {
   return (
     <div className="app min-h-screen flex flex-col" style={{ position: 'relative', zIndex: 1 }}>
       {/* Header */}
-      <header style={{ width: '100%', backgroundColor: '#0a0908', borderBottom: '1px solid #3d3a34', padding: '24px 48px', background: 'rgba(10, 10, 12, 0.7)', backdropFilter: 'blur(20px) saturate(180%)', WebkitBackdropFilter: 'blur(20px) saturate(180%)', boxShadow: '0 1px 0 rgba(255, 255, 255, 0.05) inset', zIndex: 10, flexShrink: 0 }}>
+      <header className="app-header" style={{ width: '100%', backgroundColor: '#0a0908', borderBottom: '1px solid #3d3a34', padding: '24px 48px', background: 'rgba(10, 10, 12, 0.7)', backdropFilter: 'blur(20px) saturate(180%)', WebkitBackdropFilter: 'blur(20px) saturate(180%)', boxShadow: '0 1px 0 rgba(255, 255, 255, 0.05) inset', zIndex: 10, flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           
           <img 
