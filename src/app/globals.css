@@ -380,15 +380,7 @@ input::placeholder {
 }
 
 /* Fixed Layout Styles */
-.header {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  position: relative;
-  z-index: 10;
-  background: rgba(10, 10, 12, 0.7);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset;
-}
+/* Header styles removed - now using inline styles in component */
 
 .header-title {
   font-family: var(--font-cinzel), serif;
