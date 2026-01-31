@@ -168,7 +168,7 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
                       {getConversationName(conv)}
                     </div>
                   </div>
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center justify-between">
                     <span className="text-[#8a8580] font-serif text-sm">
                       {formatDate(conv.created_at)}
                     </span>
@@ -176,9 +176,6 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
                       {conv.message_count} msgs
                     </span>
                   </div>
-                  <p className="text-[#e8e4e0] font-serif text-base line-clamp-2 leading-relaxed">
-                    {conv.preview}
-                  </p>
                 </div>
               ))
             )}
