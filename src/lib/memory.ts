@@ -84,8 +84,34 @@ export async function saveMessage(
   
   if (error) {
     console.error('❌ Error saving message:', error);
-  } else {
-    console.log(`✅ Message saved: ${role} message (${content.length} chars)`);
+    return;
+  }
+  
+  console.log(`✅ Message saved: ${role} message (${content.length} chars)`);
+  
+  // Check message count after saving - if less than 10, delete the conversation
+  // This prevents storing incomplete conversations
+  const { data: messages, error: countError } = await supabase
+    .from('messages')
+    .select('id', { count: 'exact', head: true })
+    .eq('conversation_id', conversationId);
+  
+  if (!countError) {
+    const { count } = await supabase
+      .from('messages')
+      .select('*', { count: 'exact', head: true })
+      .eq('conversation_id', conversationId);
+    
+    const messageCount = count || 0;
+    
+    // If conversation has less than 10 messages, delete it to save space
+    // Note: We check after each save, so conversations will be deleted once they're determined to be incomplete
+    // This means conversations need to reach 10 messages to be kept
+    if (messageCount < 10) {
+      // Don't delete immediately - wait until conversation is "closed" (no new messages for a while)
+      // For now, we'll let the cleanup endpoint handle this
+      // But we'll filter them out when fetching
+    }
   }
 }
 
