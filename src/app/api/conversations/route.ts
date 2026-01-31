@@ -3,13 +3,9 @@ import { NextRequest } from 'next/server';
 
 export async function GET(req: NextRequest) {
   const userId = req.nextUrl.searchParams.get('userId');
+  const mode = req.nextUrl.searchParams.get('mode') || 'personal'; // 'personal' or 'community'
   
-  if (!userId) {
-    return Response.json({ error: 'userId required' }, { status: 400 });
-  }
-  
-  // Get all conversations for this user
-  const { data: conversations, error } = await supabase
+  let query = supabase
     .from('conversations')
     .select(`
       id,
@@ -23,8 +19,20 @@ export async function GET(req: NextRequest) {
         created_at
       )
     `)
-    .eq('user_id', userId)
     .order('created_at', { ascending: false });
+  
+  if (mode === 'personal') {
+    // Personal: only this user's conversations
+    if (!userId) {
+      return Response.json({ error: 'userId required for personal mode' }, { status: 400 });
+    }
+    query = query.eq('user_id', userId);
+  } else {
+    // Community: all conversations, limited
+    query = query.limit(100);
+  }
+  
+  const { data: conversations, error } = await query;
   
   if (error) {
     console.error('Error fetching conversations:', error);

@@ -30,19 +30,18 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [selectedConvo, setSelectedConvo] = useState<Conversation | null>(null);
   const [loading, setLoading] = useState(false);
-  
-  useEffect(() => {
-    if (isOpen && userId) {
-      fetchConversations();
-    }
-  }, [isOpen, userId]);
+  const [mode, setMode] = useState<'personal' | 'community'>('personal');
   
   const fetchConversations = async () => {
-    if (!userId) return;
+    if (!userId && mode === 'personal') return;
     setLoading(true);
     
     try {
-      const res = await fetch(`/api/conversations?userId=${userId}`);
+      const url = mode === 'personal' 
+        ? `/api/conversations?userId=${userId}&mode=personal`
+        : `/api/conversations?mode=community`;
+      
+      const res = await fetch(url);
       const data = await res.json();
       setConversations(data.conversations || []);
     } catch (err) {
@@ -51,6 +50,12 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
       setLoading(false);
     }
   };
+  
+  useEffect(() => {
+    if (isOpen) {
+      fetchConversations();
+    }
+  }, [isOpen, mode, userId]);
   
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
@@ -67,16 +72,15 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
   const isOwnConversation = selectedConvo?.user_id === userId;
   
   // Generate anonymized label for other users
-  const getAnonymizedUserId = (id: string) => {
-    // Take last 4 chars of the user ID for a short identifier
-    return `Visitor #${id.slice(-4).toUpperCase()}`;
+  const getVisitorLabel = (visitorUserId: string) => {
+    return `Visitor #${visitorUserId.slice(-4).toUpperCase()}`;
   };
   
   // Determine user label
   const userLabel = isOwnConversation 
     ? 'YOU' 
     : selectedConvo?.user_id 
-      ? getAnonymizedUserId(selectedConvo.user_id)
+      ? getVisitorLabel(selectedConvo.user_id)
       : 'User';
   
   // Generate conversation name
@@ -110,6 +114,30 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
           </button>
         </div>
         
+        {/* Tabs */}
+        <div className="flex items-center gap-4 px-6 py-4 border-b border-[#3d3a34]">
+          <button
+            onClick={() => setMode('personal')}
+            className={`font-mono text-sm px-3 py-1 rounded transition-colors ${
+              mode === 'personal' 
+                ? 'bg-[#2a2620] text-[#c4b5a0]' 
+                : 'text-[#6a6560] hover:text-[#c4b5a0]'
+            }`}
+          >
+            📁 My Archives
+          </button>
+          <button
+            onClick={() => setMode('community')}
+            className={`font-mono text-sm px-3 py-1 rounded transition-colors ${
+              mode === 'community' 
+                ? 'bg-[#2a2620] text-[#c4b5a0]' 
+                : 'text-[#6a6560] hover:text-[#c4b5a0]'
+            }`}
+          >
+            🌐 Community Archives
+          </button>
+        </div>
+        
         <div className="flex flex-1 overflow-hidden">
           {/* Conversation List */}
           <div className="w-2/5 border-r border-[#3d3a34] overflow-y-auto bg-[#0a0a0c]">
@@ -119,7 +147,10 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
               </div>
             ) : conversations.length === 0 ? (
               <div className="p-6 text-[#6a6560] font-serif text-base italic">
-                No conversations yet. Start talking to the lobster!
+                {mode === 'personal' 
+                  ? "No conversations yet. Start talking to the lobster!"
+                  : "No community conversations yet."
+                }
               </div>
             ) : (
               conversations.map(conv => (
@@ -188,7 +219,10 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
                     }`}
                   >
                     <div className="text-[#c94a4a] font-serif text-sm mb-3 uppercase tracking-wider">
-                      {msg.role === 'user' ? userLabel : '🦞 The Oracle'}
+                      {msg.role === 'user' 
+                        ? (isOwnConversation ? 'YOU' : getVisitorLabel(selectedConvo?.user_id || ''))
+                        : '🦞 The Oracle'
+                      }
                     </div>
                     <div className="text-[#e8e4e0] font-serif text-base whitespace-pre-wrap leading-relaxed">
                       {msg.content}
