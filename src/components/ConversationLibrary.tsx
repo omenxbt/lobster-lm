@@ -100,7 +100,7 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
   
   return (
     <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-2 md:p-5">
-      <div className="bg-[#0d0d0f] border border-[#3d3a34] rounded-lg w-full h-full md:h-auto md:max-h-[85vh] md:max-w-5xl overflow-hidden flex flex-col shadow-2xl">
+      <div className="bg-[#0d0d0f] border border-[#3d3a34] rounded-lg w-full max-w-5xl h-[90vh] md:h-auto md:max-h-[85vh] overflow-hidden flex flex-col shadow-2xl">
         {/* Header */}
         <div className="flex items-center justify-between p-4 md:p-6 border-b border-[#3d3a34]">
           <h2 className="text-[#c94a4a] font-serif text-lg md:text-2xl" style={{ fontFamily: 'var(--font-cinzel), serif' }}>
@@ -138,9 +138,9 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
           </button>
         </div>
         
-        <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
+        <div className="flex flex-col md:flex-row flex-1 overflow-hidden min-h-0">
           {/* Conversation List */}
-          <div className="w-full md:w-2/5 border-b md:border-b-0 md:border-r border-[#3d3a34] overflow-y-auto bg-[#0a0a0c] max-h-[40vh] md:max-h-none">
+          <div className="w-full md:w-2/5 border-b md:border-b-0 md:border-r border-[#3d3a34] overflow-y-auto bg-[#0a0a0c] flex-shrink-0">
             {loading ? (
               <div className="p-6 text-[#6a6560] font-serif text-base italic">
                 Loading archives...
@@ -182,7 +182,7 @@ export default function ConversationLibrary({ userId, isOpen, onClose, onSelectC
           </div>
           
           {/* Conversation View */}
-          <div className="flex-1 overflow-y-auto p-4 md:p-6 bg-[#0a0a0c]">
+          <div className="flex-1 overflow-y-auto p-4 md:p-6 bg-[#0a0a0c] min-h-0">
             {selectedConvo ? (
               <div className="space-y-5">
                 <div className="pb-4 mb-6 border-b border-[#3d3a34]">
