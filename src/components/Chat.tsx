@@ -195,7 +195,7 @@ export function Chat() {
   return (
     <div className="app min-h-screen flex flex-col" style={{ position: 'relative', zIndex: 1 }}>
       {/* Header */}
-      <header className="relative border-b border-[#3d3a34] bg-[#0a0908] flex-shrink-0" style={{ padding: '2rem 2rem', background: 'rgba(10, 10, 12, 0.7)', backdropFilter: 'blur(20px) saturate(180%)', WebkitBackdropFilter: 'blur(20px) saturate(180%)', boxShadow: '0 1px 0 rgba(255, 255, 255, 0.05) inset', zIndex: 10 }}>
+      <header className="relative border-b border-[#3d3a34] bg-[#0a0908] flex-shrink-0 px-6 py-6 md:px-8 md:py-8" style={{ background: 'rgba(10, 10, 12, 0.7)', backdropFilter: 'blur(20px) saturate(180%)', WebkitBackdropFilter: 'blur(20px) saturate(180%)', boxShadow: '0 1px 0 rgba(255, 255, 255, 0.05) inset', zIndex: 10 }}>
         <div className="flex items-center justify-between">
           
           {/* Left: Logo only */}
