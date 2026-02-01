@@ -30,7 +30,7 @@ export function Chat() {
   const { addKarma } = useKarma();
   
   const userId = getUserId();
-  const contractAddress = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+  const contractAddress = "9yGoGgdZM6pWGRtd971RfiJBQXzR71yE9Hu7w9Kwpump";
   
   const copyToClipboard = () => {
     navigator.clipboard.writeText(contractAddress);
@@ -240,7 +240,7 @@ export function Chat() {
             </button>
             
             <a 
-              href="https://x.com"
+              href="https://x.com/lobsterLLM"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: '#6a6560' }}
