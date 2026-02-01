@@ -103,15 +103,18 @@ export async function getPreviousConversations(userId: string, limit = 5) {
     `)
     .eq('user_id', userId)
     .order('created_at', { ascending: false })
-    .limit(limit);
+    .limit(limit * 2); // Fetch more to account for filtering
   
   if (error) {
     console.error('❌ Error fetching previous conversations:', error);
     return [];
   }
   
-  console.log(`✅ Found ${data?.length || 0} previous conversations`);
-  return data || [];
+  // Filter out conversations with less than 10 messages
+  const filtered = (data || []).filter(conv => (conv.messages?.length || 0) >= 10).slice(0, limit);
+  
+  console.log(`✅ Found ${filtered.length} previous conversations (filtered from ${data?.length || 0})`);
+  return filtered;
 }
 
 // Build memory context string to inject into system prompt
